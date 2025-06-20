@@ -1,0 +1,538 @@
+:root {
+  --primary: #143D59;
+  --secondary: #F4B41A;
+  --accent: #00A6FB;
+  --background: #F9FAFB;
+  --surface: #fff;
+  --on-primary: #fff;
+  --on-background: #143D59;
+  --nav-height: 64px;
+  --transition: 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+/* RESET & BASE */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: 'Inter', Arial, sans-serif;
+  background: var(--background);
+  color: var(--on-background);
+  min-height: 100vh;
+}
+h1,h2,h3,h4,h5,h6 {
+  font-family: inherit;
+  color: var(--on-background);
+}
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+
+/* --- Make hamburger menu (nav-links) scrollable --- */
+.nav-links {
+  overflow-y: auto;
+  /* Leave space at top for header/logo if needed */
+  max-height: 100vh;
+  /* Optional: smooth scroll and custom scrollbar on webkit browsers */
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  /* You can also add a min-height if desired */
+}
+
+/* --- Drawer menu with fixed height and scroll --- */
+.nav-links {
+  height: 100vh;           /* Set your desired menu height */
+  max-height: 100vh;       /* Ensures it doesn't exceed this height */
+  overflow-y: auto;        /* Enable vertical scrolling if content exceeds height */
+  /* The rest of your drawer styles go here */
+  /* Example: */
+  background: var(--primary);
+  width: 240px;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 200;
+  box-shadow: -2px 0 10px rgba(20,61,89,0.09);
+  padding-top: var(--nav-height);
+  gap: 1.3rem;
+  align-items: flex-start;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+  transform: translateX(100%);
+}
+.nav-toggle:checked ~ .nav-links {
+  transform: translateX(0);
+}
+
+
+
+
+/* Optional: Style the scrollbar for Webkit browsers */
+.nav-links::-webkit-scrollbar {
+  width: 8px;
+  background: #143D59;
+}
+.nav-links::-webkit-scrollbar-thumb {
+  background: #FFF;
+  border-radius: 4px;
+}
+
+
+/* NAVBAR */
+.navbar {
+  background: var(--primary);
+  color: var(--on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: var(--nav-height);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--on-primary);
+  text-decoration: none;
+}
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.nav-links li a {
+  color: var(--on-primary);
+  text-decoration: none;
+  font-size: 1.05rem;
+  padding: 0.5rem;
+  border-radius: 3px;
+  transition: background var(--transition), color var(--transition);
+}
+.nav-links li a:hover,
+.nav-links li a.contact-btn {
+  background: var(--accent);
+  color: #fff;
+}
+.contact-btn {
+  font-weight: bold;
+  margin-left: 1rem;
+}
+.nav-toggle { display: none; }
+.nav-toggle-label { display: none; cursor: pointer; height: 2rem; width: 2rem; align-items: center; }
+.nav-toggle-label span,
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  display: block;
+  background: var(--on-primary);
+  height: 3px;
+  width: 2rem;
+  border-radius: 2px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+.nav-toggle-label span::before,
+.nav-toggle-label span::after {
+  content: '';
+  position: absolute;
+}
+.nav-toggle-label span::before { top: -8px; }
+.nav-toggle-label span::after { bottom: -8px; }
+
+.community-says{
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+
+
+
+
+
+@media (max-width: 900px) {
+  .nav-links {
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background: var(--primary);
+    height: 100vh;
+    width: 220px;
+    transform: translateX(100%);
+    transition: transform var(--transition);
+    padding-top: var(--nav-height);
+    gap: 1.3rem;
+    align-items: flex-start;
+    z-index: 200;
+  }
+  .nav-toggle:checked ~ .nav-links {
+    transform: translateX(0);
+  }
+  .nav-toggle-label {
+    display: flex;
+  }
+}
+
+/* HERO SLIDER */
+.hero {
+  background: var(--primary);
+  color: var(--on-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  min-height: 340px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-slider {
+  width: 90%;
+  max-width: 800px;
+  position: relative;
+}
+.slide {
+  display: none;
+  text-align: center;
+  animation: fadeIn 1s;
+}
+.slide.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.slider-btn {
+  position: absolute;
+  top: 50%;
+  background: rgba(20,61,89,0.7);
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  padding: 0.0em 0.0em;
+  cursor: pointer;
+  border-radius: 10%;
+  transform: translateY(-60%);
+  transition: background 0.2s;
+}
+.slider-btn.prev { left: 0; }
+.slider-btn.next { right: 0; }
+.slider-btn:hover { background: var(--accent); }
+
+/* SECTIONS */
+section { max-width: 1100px; margin: 3rem auto; padding: 0 1rem; }
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 2.8rem 1rem;
+  background: var(--surface);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  margin-top: -30px;
+  position: relative;
+  z-index: 1;
+}
+.stat {
+  text-align: center;
+}
+.stat-number {
+  font-size: 2.3rem;
+  font-weight: bold;
+  color: var(--primary);
+  display: block;
+}
+.stat-label {
+  margin-top: 0.2rem;
+  color: #555;
+}
+.news-highlights { margin-bottom: 1rem; }
+.news-list {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.news-article {
+  background: var(--surface);
+  border-radius: 9px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+  flex: 1 1 300px;
+  display: flex;
+  gap: 1rem;
+  overflow: hidden;
+  align-items: center;
+  min-width: 290px;
+}
+.news-article img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+}
+.news-article h3 {
+  margin: 0 0 0.3em;
+  font-size: 1.1rem;
+}
+.testimonials {
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 3rem 1rem;
+  text-align: center;
+}
+.testimonial-list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.testimonial-list blockquote {
+  background: rgba(255,255,255,0.09);
+  padding: 1.3rem 1.7rem;
+  border-radius: 6px;
+  max-width: 350px;
+  margin: 1rem 0;
+  font-style: italic;
+  position: relative;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+}
+.testimonial-list footer {
+  margin-top: 0.6em;
+  font-size: 0.95em;
+  font-weight: bold;
+}
+/* About tabs */
+.tabs {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+.tab-link {
+  color: var(--primary);
+  padding: 0.7rem 1.1rem;
+  border-radius: 4px;
+  background: #f3f3f3;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  transition: background .2s;
+}
+.tab-link.active, .tab-link:hover {
+  background: var(--accent);
+  color: #fff;
+}
+/* Accordions */
+.accordion { border: 1px solid #eee; border-radius: 6px; margin-bottom: 1.2em; background: #fff;}
+.accordion .accordion-header { padding: 1em; cursor: pointer; font-weight: bold; border-bottom: 1px solid #eee; transition: background .2s;}
+.accordion .accordion-header:hover { background: #f5f5f5; }
+.accordion .accordion-content { padding: 1em; display: none; }
+.accordion.open .accordion-content { display: block; animation: fadeIn .3s;}
+/* Gallery */
+.gallery-grid {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+.gallery-thumb {
+  width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  object-fit: cover;
+  aspect-ratio: 4/3;
+}
+.gallery-thumb:hover { transform: scale(1.04); }
+.lightbox-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.82);
+  z-index: 1000;
+  display: flex; align-items: center; justify-content: center;
+}
+.lightbox-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+}
+.lightbox-close {
+  position: absolute; top: 10px; right: 10px;
+  background: none; border: none; color: #222; font-size: 2rem; cursor: pointer;
+}
+.lightbox-nav {
+  position: absolute; top: 50%;
+  background: none; border: none; color: #222; font-size: 2.5rem; cursor: pointer;
+  z-index: 2;
+}
+.lightbox-nav.prev { left: -48px; }
+.lightbox-nav.next { right: -48px; }
+.lightbox-caption { margin-top: 1rem; color: #333; }
+/* Forms */
+form label { display: block; margin: 1em 0 0.3em; font-weight: bold;}
+input, textarea {
+  padding: 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+button, input[type="submit"] {
+  padding: 0.9rem 1.6rem;
+  border: none;
+  border-radius: 4px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+button:hover, input[type="submit"]:hover { background: var(--accent); }
+/* Footer */
+footer {
+  background: var(--primary);
+  color: var(--on-primary);
+  padding: 2rem 0 1.3rem;
+  text-align: center;
+  margin-top: 3rem;
+}
+@media (max-width: 900px) {
+  .stats { flex-direction: column; gap: 1.5rem; }
+  .news-list { flex-direction: column; gap: 1.3rem; }
+  .testimonial-list { flex-direction: row; gap: 1.3rem; }
+  .tabs { gap: 1rem; }
+
+}
+
+
+
+
+@media (min-width: 901px) {
+  /* --- Compact Header Nav for Many Links (Override) --- */
+  .nav-links {
+    gap: 1.3rem !important;
+  }
+
+  .nav-links li a {
+    padding: 0rem 1rem !important;
+    min-width: unset !important;
+    min-height: unset !important;
+    margin: 0 !important;
+    border-radius: 2px !important;
+    line-height: 1 !important;
+  }
+
+  .nav-links li {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  
+  
+  .slider-btn {
+  position: absolute;
+  top: 50%;
+  background: rgba(20,61,89,0.7);
+  color: #fff;
+  border: none;
+  font-size: 2rem;
+  padding: 0.1em 0.35em;
+  cursor: pointer;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  transition: background 0.2s;
+}
+.slider-btn.prev { left: 0; }
+.slider-btn.next { right: 0; }
+  .slider-btn:hover { background: var(--accent); }
+}
+
+
+@media (min-width: 901px) {
+  .navbar > .navbar-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  /* If you don't use .navbar-container, this targets .navbar directly: */
+  .navbar {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+@media (min-width: 901px) {
+  .nav-toggle-label {
+    display: flex !important;
+    align-items: center;
+    cursor: pointer;
+    height: 2.4rem;
+    width: 2.4rem;
+    z-index: 250;
+    margin-left: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    top: 0;
+    background: var(--primary);
+    height: 100vh;
+    width: 240px;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    padding-top: var(--nav-height);
+    align-items: flex-start;
+    z-index: 200;
+    box-shadow: -2px 0 10px rgba(20,61,89,0.09);
+  }
+  .nav-toggle:checked ~ .nav-links {
+    transform: translateX(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.big-header-text{
+  font-weight: bold;
+  font-size: 3.2rem;
+}

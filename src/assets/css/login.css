@@ -1,0 +1,200 @@
+:root {
+  --primary: #143D59;
+  --accent: #F4B41A;
+  --bg-light: #f7f9fb;
+  --card-bg: #fff;
+  --text: #222;
+  --radius: 16px;
+  --shadow: 0 2px 16px rgba(20,61,89,0.07);
+  --transition: 0.18s cubic-bezier(.4,0,.2,1);
+  --navy-dark: #0f2a43;
+}
+
+/* Login Page Styles */
+body.login-bg {
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-container {
+  background: var(--card-bg);
+  padding: 2.5rem 2.1rem;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  width: 100%;
+  max-width: 370px;
+  text-align: center;
+}
+.login-title {
+  color: var(--primary);
+  margin-bottom: 1.7rem;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+.login-form label {
+  text-align: left;
+  display: block;
+  margin-top: 1.1rem;
+  margin-bottom: 0.25rem;
+  color: var(--primary);
+  font-weight: 500;
+}
+.login-form input {
+  width: 90%;
+  padding: 0.68rem 1rem;
+  border: 1.5px solid #e7e9ee;
+  border-radius: 8px;
+  outline: none;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  transition: border var(--transition);
+  background: #fafbfc;
+}
+.login-form input:focus {
+  border: 1.5px solid var(--accent);
+}
+.login-btn {
+  margin-top: 1.3rem;
+  width: 90%;
+  padding: 0.7rem 0;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-size: 1.08rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+.login-btn:hover, .login-btn:focus {
+  background: var(--accent);
+  color: var(--primary);
+}
+.login-links {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.97rem;
+}
+.login-links a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.login-links a:hover {
+  color: var(--accent);
+}
+
+/* Dashboard Styles */
+body.dashboard-bg {
+  background: var(--bg-light);
+  min-height: 100vh;
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  color: var(--text);
+}
+.dashboard-nav {
+  background: var(--primary);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  min-height: 60px;
+}
+.dashboard-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+.dashboard-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1.6rem;
+  margin: 0;
+  padding: 0;
+}
+.dashboard-nav li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.04rem;
+  padding: 0.38rem 0.9rem;
+  border-radius: 6px;
+  transition: background var(--transition), color var(--transition);
+}
+.dashboard-nav li a.active,
+.dashboard-nav li a:hover {
+  background: var(--accent);
+  color: var(--primary);
+}
+.dashboard-nav .logout-btn {
+  background: #fff;
+  color: var(--primary) !important;
+  font-weight: 600;
+  margin-left: 0.7rem;
+  transition: background var(--transition), color var(--transition);
+}
+.dashboard-nav .logout-btn:hover {
+  background: var(--accent);
+  color: var(--navy-dark) !important;
+}
+.dashboard-main {
+  max-width: 1100px;
+  margin: 2.8rem auto 0 auto;
+  padding: 0 1.2rem;
+}
+.dashboard-main h2 {
+  font-size: 2.1rem;
+  font-weight: 700;
+  margin-bottom: 2.1rem;
+  color: var(--primary);
+}
+.dashboard-widgets {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.dashboard-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.7rem 1.3rem 1.1rem 1.3rem;
+  min-width: 270px;
+  flex: 1 1 270px;
+  margin-bottom: 1.5rem;
+}
+.dashboard-card h3 {
+  color: var(--primary);
+  font-size: 1.14rem;
+  margin-bottom: 1.1rem;
+  font-weight: 600;
+}
+.dashboard-card ul {
+  padding-left: 1.1rem;
+  font-size: 1rem;
+}
+.dashboard-card li + li {
+  margin-top: 0.55rem;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .dashboard-widgets {
+    flex-direction: column;
+    gap: 0;
+  }
+}
+@media (max-width: 500px) {
+  .dashboard-nav {
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 0.8rem 0.8rem;
+    align-items: flex-start;
+  }
+  .dashboard-main {
+    margin-top: 2rem;
+    padding: 0 0.3rem;
+  }
+}
